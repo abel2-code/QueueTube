@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import q from './q.png';
 import './Nav.css'
 
 function Nav() {
@@ -14,9 +15,10 @@ function Nav() {
 
     return (
         <div className={`nav ${show && "nav-black"}`}>
-            <img className="nav-logo"
-            src="#!"
-            alt="QueueTube Logo" 
+            <img 
+            src={q} 
+            className="nav-logo" 
+            alt="logo"
             />
             <img className="nav-avatar"
             src="#!"
