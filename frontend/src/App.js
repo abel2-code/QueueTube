@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Row from './Row';
 import requests from './requests';
 import Banner from './Banner';
 import Nav from './Nav';
 
+
+
 function App()  {
+  useEffect(() => {
+    fetch('http://localhost:3000/users', {
+      credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(users => console.log(users))
+}, []);
   return (
     <div className="app">
       <Nav />
