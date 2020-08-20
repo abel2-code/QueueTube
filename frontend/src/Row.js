@@ -30,7 +30,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
     };
 
     const handleClick = (movie) => {
-        console.log(movie)
         if (trailerUrl && currentMovie.title === movie.title) {
             setTrailerUrl('');
         } else {
@@ -44,14 +43,27 @@ function Row({ title, fetchUrl, isLargeRow }) {
         }
     }
 
-    const handleAddMovie = (movie) => {
-        console.log(movie)
+    const handleAddMovie = () => {
+        let objectConfig = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                youtube_url: trailerUrl,
+                title: currentMovie.title,
+                overview: currentMovie.overview,
+                list_id: 1
+            })
+        }
+        fetch('http://localhost:3000/videos', objectConfig)
+        .then(res => res.json())
+        .then(video => console.log(video))
     }
 
     return (
         <div className="row">
             <h2>{title}</h2>
-
             <div className="row-posters">
                 {movies.map(movie => (
                     movie.backdrop_path ? 
@@ -63,7 +75,16 @@ function Row({ title, fetchUrl, isLargeRow }) {
                     : ""
                 ))}
             </div>
-                {trailerUrl ? currentMovie ? <div><h5>{currentMovie.title}</h5><YouTube videoId={trailerUrl} opts={opts} onClick={() => handleAddMovie}/></div> : <div><h2>Sorry, there is no trailer for this movie</h2></div> : ""}
+                {trailerUrl ? 
+                currentMovie ? 
+                <div>
+                <h5>{currentMovie.title}</h5>
+                <YouTube videoId={trailerUrl} 
+                opts={opts}/>
+                <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button>
+                </div> 
+                : <div><h2>Sorry, there is no trailer for this movie</h2></div> 
+                : ""}
         </div>
     )
 }

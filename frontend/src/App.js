@@ -8,17 +8,22 @@ import Nav from './Nav';
 
 
 function App()  {
+  const [lists, setLists] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3000/users', {
+    fetch('http://localhost:3000/lists', {
       credentials: 'include'
     })
     .then(res => res.json())
-    .then(users => console.log(users))
-}, []);
+    .then(lists => setLists(lists))
+  });
+
+
+
+
   return (
     <div className="app">
       <Nav />
-      <Banner />
+      <Banner lists={lists}/>
       <Row title="ORIGINALS" fetchUrl={requests.fetchNetflixOriginals} isLargeRow />
       <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
       <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />

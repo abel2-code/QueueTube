@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import q from './q.png';
+import Modal from './Modal'
+import q from './queuetube_logo.png';
+import avatar from './avatar_one.png'
 import './Nav.css'
 
-function Nav() {
+export default function Nav() {
     const [show, handleShow] = useState(false);
 
     useEffect(() => {
@@ -21,11 +23,13 @@ function Nav() {
             alt="logo"
             />
             <img className="nav-avatar"
-            src="#!"
+            src={avatar}
             alt="QueTube Avatar"
             />
+            <Modal/>
         </div>
     )
 }
 
-export default Nav
+
+
