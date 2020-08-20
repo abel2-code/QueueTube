@@ -43,10 +43,31 @@ export default function SimpleModal() {
       setOpen(false);
     };
 
+    // const handleSubmit = (e) => {
+    //   e.preventDefault()
+    //   let form = e.currentTarget
+    //   let objectConfig = {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       name: e.target.name.value,
+    //       email: e.target.email.value,
+    //       password: e.target.password.value
+    //     })
+    //   }
+    //   fetch('http://localhost:3000/users', objectConfig)
+    //   .then(res => res.json())
+    //   .then(user => console.log(user))
+    //   form.reset()
+    // }
+
     const handleSubmit = (e) => {
       e.preventDefault()
       let form = e.currentTarget
       let objectConfig = {
+        credentials: 'include',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -57,7 +78,7 @@ export default function SimpleModal() {
           password: e.target.password.value
         })
       }
-      fetch('http://localhost:3000/users', objectConfig)
+      fetch('http://localhost:3000/login', objectConfig)
       .then(res => res.json())
       .then(user => console.log(user))
       form.reset()

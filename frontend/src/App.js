@@ -15,7 +15,14 @@ function App()  {
     })
     .then(res => res.json())
     .then(lists => setLists(lists))
-  });
+  }, []);
+  useEffect(() => {
+    fetch('http://localhost:3000/currentuser', {
+      credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(user => console.log(user))
+  }, []);
 
 
 

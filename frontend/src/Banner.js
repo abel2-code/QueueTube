@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from './axios';
 import requests from './requests';
-import './Banner.css'
+import './Banner.css';
+import { useHistory } from "react-router";
 
 function Banner({lists}) {
-
+    let history = useHistory();
     const [movie, setMovie] = useState([]);
-    const [alllists, setList] = useState([])
+    const [mylists, setList] = useState(false)
 
     useEffect(() => {
         async function fetchData() {
@@ -26,7 +27,8 @@ function Banner({lists}) {
     }
 
     const displayList = () => {
-        setList(lists)
+        // setList(!mylists)
+        history.push("/lists");
 
     }
 
@@ -49,7 +51,7 @@ function Banner({lists}) {
             </div>
 
             <div className="banner--fadeBottom" />
-            <div>{alllists ? alllists.map(list => <h1>{list.title}</h1>) : ''}</div>
+            <div>{mylists ? lists.map(list => <h3>{list.title}</h3>) : ''}</div>
         </header>
     )
 }

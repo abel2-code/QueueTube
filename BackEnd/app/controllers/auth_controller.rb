@@ -2,8 +2,10 @@ class AuthController < ApplicationController
 
     def login
         user = User.find_by(name: params[:name])
+
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
+
             render json: user
         else
             render json: {succes: false}
@@ -11,6 +13,7 @@ class AuthController < ApplicationController
     end
 
     def current_user
+
         if session[:user_id] 
             user = User.find(session[:user_id])
             render json: user
