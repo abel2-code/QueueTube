@@ -53,7 +53,7 @@ function Row({ title, fetchUrl, isLargeRow, user }) {
                 youtube_url: trailerUrl,
                 title: currentMovie.title,
                 overview: currentMovie.overview,
-                list_id: 1
+                list_id: user.lists[user.lists.length - 1].id
             })
         }
         fetch('http://localhost:3001/videos', objectConfig)

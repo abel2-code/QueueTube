@@ -92,7 +92,7 @@ export default function SimpleModal({ login, getSignIn }) {
   
     const body = (
       <div style={modalStyle} className={classes.paper}>
-        <h2 id="simple-modal-title">Sign Up</h2>
+        <h2 id="simple-modal-title">Sign Up/Login</h2>
         <form onSubmit={handleSubmit}>
           <input type='text' name='name' placeholder='Enter your name' className="textbox"></input>
           <input type='text' name='email' placeholder='Enter your email' className="textbox"></input>
