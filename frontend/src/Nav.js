@@ -4,9 +4,8 @@ import q from './queuetube_logo.png';
 import avatar from './avatar_one.png'
 import './Nav.css'
 
-export default function Nav() {
+export default function Nav({ user, logout, login, getSignIn }) {
     const [show, handleShow] = useState(false);
-    const [user, setUser] = useState('');
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -16,9 +15,21 @@ export default function Nav() {
         })
     })
 
+    const handleClick = () => (
+        fetch('http://localhost:3001/logout', {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => logout())
+    )
+
     return (
         <div className={`nav ${show && "nav-black"}`}>
             <img 
+            onClick={() => console.log(user)}
             src={q} 
             className="nav-logo" 
             alt="logo"
@@ -27,9 +38,10 @@ export default function Nav() {
             <img className="nav-avatar"
             src={avatar}
             alt="QueTube Avatar"
+            onClick={handleClick}
             />
             :
-            <Modal login={user => setUser(user)}/>}
+            <Modal currentUser={user} login={login} getSignIn={getSignIn}/>}
         </div>
     )
 }

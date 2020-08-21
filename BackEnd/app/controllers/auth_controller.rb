@@ -18,7 +18,8 @@ class AuthController < ApplicationController
             user = User.find(session[:user_id])
             render json: user
         else
-            render json: {error: 'Sorry, no current user'}
+            user = nil
+            render json: user
         end
     end
 

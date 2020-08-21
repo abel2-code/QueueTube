@@ -2,7 +2,8 @@ class UsersController < ApplicationController
     before_action :define_current_user
 
     def index
-        render json: User.all
+        users = User.all
+        render json: users, include: :lists
     end
 
     def create

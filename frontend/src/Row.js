@@ -6,7 +6,7 @@ import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl, isLargeRow }) {
+function Row({ title, fetchUrl, isLargeRow, user }) {
     const [movies, setMovies] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const [currentMovie, setCurrentMovie] = useState("");
@@ -56,7 +56,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 list_id: 1
             })
         }
-        fetch('http://localhost:3000/videos', objectConfig)
+        fetch('http://localhost:3001/videos', objectConfig)
         .then(res => res.json())
         .then(video => console.log(video))
     }
@@ -81,7 +81,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 <h5>{currentMovie.title}</h5>
                 <YouTube videoId={trailerUrl} 
                 opts={opts}/>
-                <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button>
+                {user ? <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button> : ""}
                 </div> 
                 : <div><h2>Sorry, there is no trailer for this movie</h2></div> 
                 : ""}
