@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
     def index
         users = User.all
+<<<<<<< HEAD
         render json: users, include: [:lists, :videos]
+=======
+        render json: users, include: :lists
+>>>>>>> ab61789634ccef99976b88b8e5f53b555f083133
     end
 
     def create

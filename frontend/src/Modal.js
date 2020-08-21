@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import avatar from './avatar_one.png'
 import Modal from '@material-ui/core/Modal';
@@ -29,7 +29,8 @@ function rand() {
     },
   }));
   
-export default function SimpleModal() {
+export default function SimpleModal({ login, getSignIn }) {
+    const [userName, setUserName] = useState('');
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -66,6 +67,7 @@ export default function SimpleModal() {
     const handleSubmit = (e) => {
       e.preventDefault()
       let form = e.currentTarget
+<<<<<<< HEAD
       let objectConfig = {
         credentials: 'include',
         method: 'POST',
@@ -81,6 +83,28 @@ export default function SimpleModal() {
       fetch('http://localhost:3001/login', objectConfig)
       .then(res => res.json())
       .then(user => console.log(user))
+=======
+      getSignIn(e)
+      // let objectConfig = {
+      //   credentials: 'include',
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     name: e.target.name.value,
+      //     email: e.target.email.value,
+      //     password: e.target.password.value
+      //   })
+      // }
+      // fetch('http://localhost:3001/login', objectConfig)
+      // .then(res => res.json())
+      // .then(user => {
+      //   setUserName(user);
+      //   login(userName)
+      //   console.log(login)
+      // })
+>>>>>>> ab61789634ccef99976b88b8e5f53b555f083133
       form.reset()
     }
   
@@ -88,10 +112,10 @@ export default function SimpleModal() {
       <div style={modalStyle} className={classes.paper}>
         <h2 id="simple-modal-title">Sign Up</h2>
         <form onSubmit={handleSubmit}>
-          <input type='text' name='name' placeholder='Enter your name'></input>
-          <input type='text' name='email' placeholder='Enter your email'></input>
-          <input type='text' name='password' placeholder='Enter your password'></input>
-          <input type='submit' value='Submit'></input>
+          <input type='text' name='name' placeholder='Enter your name' className="textbox"></input>
+          <input type='text' name='email' placeholder='Enter your email' className="textbox"></input>
+          <input type='text' name='password' placeholder='Enter your password' className="textbox"></input>
+          <input type='submit' value='Submit' className="submit"></input>
         </form>
         <SimpleModal />
       </div>
@@ -110,7 +134,7 @@ export default function SimpleModal() {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          {body}
+            {body}
         </Modal>
       </div>
     );
