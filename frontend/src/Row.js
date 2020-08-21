@@ -10,7 +10,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
     const [movies, setMovies] = useState([]);
     const [trailerUrl, setTrailerUrl] = useState("");
     const [currentMovie, setCurrentMovie] = useState("");
-    const [addedMovies, setAddedMovies] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
@@ -45,6 +44,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
     const handleAddMovie = () => {
         let objectConfig = {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -56,10 +56,20 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 list_id: 1
             })
         }
-        fetch('http://localhost:3000/videos', objectConfig)
+        fetch('http://localhost:3001/videos', objectConfig)
         .then(res => res.json())
         .then(video => console.log(video))
     }
+
+    const [currentUser, setUser] = useState('');
+
+    useEffect(() => {
+      fetch('http://localhost:3001/currentuser', {
+        credentials: 'include'
+      })
+      .then(res => res.json())
+      .then(user => setUser(user))
+      }, []);
 
     return (
         <div className="row">
@@ -82,7 +92,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 <YouTube videoId={trailerUrl} 
                 opts={opts}/>
                 <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button>
-                </div> 
+                </div>
                 : <div><h2>Sorry, there is no trailer for this movie</h2></div> 
                 : ""}
         </div>

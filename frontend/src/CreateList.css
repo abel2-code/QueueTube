@@ -1,0 +1,23 @@
+.create-list {
+    position: fixed;
+    top: 50px;
+    left: 1200px;
+    width: 160px;
+    background-color: #9f2500;
+    border: none;
+    border-radius: 0.2vw;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .create-list:hover {
+    opacity: 1;
+    color: black
+  }

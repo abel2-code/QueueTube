@@ -1,4 +1,4 @@
 class Video < ApplicationRecord
   belongs_to :list
-  has_many :videos, through: :lists
+  has_many :users, through: :list
 end

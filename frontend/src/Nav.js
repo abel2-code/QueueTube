@@ -22,10 +22,6 @@ export default function Nav() {
             className="nav-logo" 
             alt="logo"
             />
-            <img className="nav-avatar"
-            src={avatar}
-            alt="QueTube Avatar"
-            />
             <Modal/>
         </div>
     )

@@ -1,17 +1,56 @@
 import React, { useState, useEffect } from 'react';
+import './Lists.css';
+import CreateList from './CreateList';
+import { useHistory } from "react-router";
 
 const Lists = () => {
-    const [lists, setLists] = useState([]);
+    let history = useHistory();
+    const [myVideos, setVideos] = useState([])
+    const [currentUser, setUser] = useState('');
+    const [currentList, setList] = useState('')
+
     useEffect(() => {
-      fetch('http://localhost:3000/lists', {
+      fetch('http://localhost:3001/currentuser', {
         credentials: 'include'
       })
       .then(res => res.json())
-      .then(lists => setLists(lists))
-    }, []);
+      .then(user => setUser(user))
+      }, []);
+
+      const goBack = () => {
+        history.push('/');
+      }
+
+      const displayMovies = (id) => {
+        setList(id)
+        fetch(`http://localhost:3001/lists/${id}`)
+        .then(res => res.json())
+        .then(list => setVideos(list.videos))
+      }
+
+      const deleteList = (id) => {
+        fetch(`http://localhost:3001/lists/${id}`, {
+          method: 'DELETE',
+          headers: {'Content-Type':'application/json'}
+        })
+      }
+
     return (
-        <div>
-            <div>{lists.map(list => <h3>{list.title}</h3>)}</div>
+        <div className='lists'>
+            <button className='go-back' onClick={() => goBack()}>Go Back</button>
+            <div><CreateList/></div>
+            <div className='each-list'>
+              {currentUser ? 
+              currentUser.lists.map(list => 
+              <div key={list.id}>
+                <h1 className='list-title' onClick={() => displayMovies(list.id)}>{list.title}</h1>
+
+                <button className='delete' onClick={() => deleteList(list.id)}>Delete List</button>
+                <ul>{myVideos ? myVideos.map(video => video.list_id === currentList ? console.log('yes') : console.log('no'))
+                : null}
+                </ul>
+              </div>) 
+              : null}</div>
         </div>
     );
 }

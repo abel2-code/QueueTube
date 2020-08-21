@@ -1,0 +1,110 @@
+.lists {
+  position: absolute;
+  /* top: -40px; 
+  bottom: -1000px;  */
+  height: 1000%;
+  width: 250%;
+  background: linear-gradient(0deg, rgba(130,0,0,1) 0%, rgba(0,0,0,1) 43%, rgba(17,0,0,1) 87%);
+}
+
+.each-list {
+  margin-top: 100px;
+  margin-left: 100px;
+  width: 50%;
+  padding: 10px;
+}
+
+.list-title {
+  width: 50%;
+  padding: 10px;
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+  color: white;
+  transition: all .2s ease-in-out;
+}
+
+.list-title:hover {
+  transform: scale(1.01);
+}
+
+.go-back {
+  position: fixed;
+  top: 50px;
+  left: 1400px;
+  width: 160px;
+  background-color: #9f2500;
+  border: none;
+  border-radius: 0.2vw;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.go-back:hover {opacity: 1}
+
+.create-list {
+  position: fixed;
+  top: 50px;
+  left: 1100px;
+  height: 50px;
+  width: 160px;
+  background-color: #9f2500;
+  border: none;
+  border-radius: 0.2vw;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.create-list:hover {opacity: 1}
+
+.movie-title {
+  width: 50%;
+  padding: 10px;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-bottom: 0.3rem;
+  color: white
+}
+
+.movie-overview {
+  width: 50%;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 200;
+  padding-bottom: 0.3rem;
+  color: white
+}
+
+.youtube-embed {
+  position: "absolute";
+}
+
+.delete {
+  margin-top: -10px;
+  background-color: #9f2500;
+  border: none;
+  border-radius: 0.2vw;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}

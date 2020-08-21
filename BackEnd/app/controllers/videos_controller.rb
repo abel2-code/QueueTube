@@ -1,12 +1,17 @@
 class VideosController < ApplicationController
     def index
         videos = Video.all
-        render json: videos
+        render json: videos, include: [:list, :users]
+    end
+
+    def show
+        video = Video.find(params[:id])
+        render json: video, include: [:list, :users]
     end
 
     def create
         video = Video.create(video_params)
-        render json: video
+        render json: video, include: [:list, :users]
     end
     
     def video_params

@@ -4,10 +4,9 @@ import requests from './requests';
 import './Banner.css';
 import { useHistory } from "react-router";
 
-function Banner({lists}) {
+function Banner() {
     let history = useHistory();
     const [movie, setMovie] = useState([]);
-    const [mylists, setList] = useState(false)
 
     useEffect(() => {
         async function fetchData() {
@@ -27,7 +26,6 @@ function Banner({lists}) {
     }
 
     const displayList = () => {
-        // setList(!mylists)
         history.push("/lists");
 
     }
@@ -51,7 +49,6 @@ function Banner({lists}) {
             </div>
 
             <div className="banner--fadeBottom" />
-            <div>{mylists ? lists.map(list => <h3>{list.title}</h3>) : ''}</div>
         </header>
     )
 }

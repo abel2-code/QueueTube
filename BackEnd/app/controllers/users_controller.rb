@@ -2,27 +2,27 @@ class UsersController < ApplicationController
     before_action :define_current_user
 
     def index
-        render json: User.all
+        users = User.all
+        render json: users, include: [:lists, :videos]
     end
 
     def create
         user = User.create(user_params)
         session[:user_id] = user.id 
-        render json: user
+        render json: user, include: [:lists, :videos]
     end
 
     def show
-        render json: current_user, include: [ :lists ]
+        render json: current_user, include: [:lists, :videos]
     end
 
     def update
         current_user.update(user_params)
-        render json: current_user
+        render json: current_user, include: [:lists, :videos]
     end
 
     def destroy
         current_user.destroy
-        render json: current_user
     end
 
     def user_params

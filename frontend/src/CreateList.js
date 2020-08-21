@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import avatar from './avatar_one.png'
+import './CreateList.css'
 import Modal from '@material-ui/core/Modal';
 
 function rand() {
@@ -43,25 +43,15 @@ export default function SimpleModal() {
       setOpen(false);
     };
 
-    // const handleSubmit = (e) => {
-    //   e.preventDefault()
-    //   let form = e.currentTarget
-    //   let objectConfig = {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       name: e.target.name.value,
-    //       email: e.target.email.value,
-    //       password: e.target.password.value
-    //     })
-    //   }
-    //   fetch('http://localhost:3000/users', objectConfig)
-    //   .then(res => res.json())
-    //   .then(user => console.log(user))
-    //   form.reset()
-    // }
+    const [currentUser, setUser] = useState('');
+
+    useEffect(() => {
+      fetch('http://localhost:3001/currentuser', {
+        credentials: 'include'
+      })
+      .then(res => res.json())
+      .then(user => setUser(user))
+      }, []);
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -73,24 +63,21 @@ export default function SimpleModal() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: e.target.name.value,
-          email: e.target.email.value,
-          password: e.target.password.value
+          title: e.target.title.value,
+          user_id: currentUser.id
         })
       }
-      fetch('http://localhost:3001/login', objectConfig)
+      fetch('http://localhost:3001/lists', objectConfig)
       .then(res => res.json())
-      .then(user => console.log(user))
+      .then(newList=> console.log(newList))
       form.reset()
     }
   
     const body = (
       <div style={modalStyle} className={classes.paper}>
-        <h2 id="simple-modal-title">Sign Up</h2>
+        <h2 id="simple-modal-title">Create List</h2>
         <form onSubmit={handleSubmit}>
-          <input type='text' name='name' placeholder='Enter your name'></input>
-          <input type='text' name='email' placeholder='Enter your email'></input>
-          <input type='text' name='password' placeholder='Enter your password'></input>
+          <input type='text' name='title' placeholder='List name'></input>
           <input type='submit' value='Submit'></input>
         </form>
         <SimpleModal />
@@ -99,11 +86,7 @@ export default function SimpleModal() {
   
     return (
       <div>
-        <img className="nav-avatar"
-            src={avatar}
-            alt="QueTube Avatar"
-            onClick={handleOpen}
-            />
+        <button className='create-list' onClick={handleOpen}>Create List</button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -115,4 +98,3 @@ export default function SimpleModal() {
       </div>
     );
   }
-  
