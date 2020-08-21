@@ -22,6 +22,22 @@ function Banner({lists}) {
         fetchData();
     }, [])
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            async function fetchData() {
+                const request = await axios.get(requests.fetchNetflixOriginals);
+                setMovie(
+                    request.data.results[
+                        Math.floor(Math.random() * request.data.results.length -1)
+                    ]
+                );
+                return request;
+            }
+            fetchData();
+        }, 10000);
+        return () => clearInterval(interval);
+    }, [])
+
     function truncate(str, n) {
         return str?.length > n ? str.substr(0, n - 1) + "..." : str;
     }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import avatar from './avatar_one.png'
 import Modal from '@material-ui/core/Modal';
@@ -29,7 +29,8 @@ function rand() {
     },
   }));
   
-export default function SimpleModal() {
+export default function SimpleModal({ login }) {
+    const [userName, setUserName] = useState('');
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -37,6 +38,7 @@ export default function SimpleModal() {
   
     const handleOpen = () => {
       setOpen(true);
+      console.log(login)
     };
   
     const handleClose = () => {
@@ -78,9 +80,9 @@ export default function SimpleModal() {
           password: e.target.password.value
         })
       }
-      fetch('http://localhost:3000/login', objectConfig)
+      fetch('http://localhost:3001/login', objectConfig)
       .then(res => res.json())
-      .then(user => console.log(user))
+      .then(user => {setUserName(user.name); login(userName)})
       form.reset()
     }
   

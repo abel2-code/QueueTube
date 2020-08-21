@@ -6,6 +6,7 @@ import './Nav.css'
 
 export default function Nav() {
     const [show, handleShow] = useState(false);
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -22,11 +23,13 @@ export default function Nav() {
             className="nav-logo" 
             alt="logo"
             />
+            {user ? 
             <img className="nav-avatar"
             src={avatar}
             alt="QueTube Avatar"
             />
-            <Modal/>
+            :
+            <Modal login={user => setUser(user)}/>}
         </div>
     )
 }
