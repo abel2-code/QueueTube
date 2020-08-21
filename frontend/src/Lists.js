@@ -81,7 +81,21 @@ const Lists = () => {
                 <h1 className='list-title' onClick={() => displayMovies(list.id)}>{list.title}</h1>
 
                 <button className='delete' onClick={() => deleteList(list.id)}>Delete List</button>
-                <ul>{myVideos ? myVideos.map(video => video.list_id === currentList ? console.log('yes') : console.log('no'))
+                <ul>{myVideos ? myVideos.map(video => video.list_id === currentList ? 
+                <div key={video.id}>
+                  <p className='movie-title'>{video.title}</p>
+                  <p className='movie-overview'>{video.overview}</p>
+                  <iframe 
+                  width="560" 
+                  height="315" 
+                  src={`https://www.youtube.com/embed/${video.youtube_url}`} 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen>   
+                  </iframe>
+                </div>
+                :
+                null)
                 : null}
                 </ul>
               </div>) 
