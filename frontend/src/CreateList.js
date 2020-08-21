@@ -29,7 +29,7 @@ function rand() {
     },
   }));
   
-export default function SimpleModal() {
+export default function SimpleModal({getList}) {
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -56,20 +56,21 @@ export default function SimpleModal() {
     const handleSubmit = (e) => {
       e.preventDefault()
       let form = e.currentTarget
-      let objectConfig = {
-        credentials: 'include',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          title: e.target.title.value,
-          user_id: currentUser.id
-        })
-      }
-      fetch('http://localhost:3001/lists', objectConfig)
-      .then(res => res.json())
-      .then(newList=> console.log(newList))
+      getList(e)
+      // let objectConfig = {
+      //   credentials: 'include',
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     title: e.target.title.value,
+      //     user_id: currentUser.id
+      //   })
+      // }
+      // fetch('http://localhost:3001/lists', objectConfig)
+      // .then(res => res.json())
+      // .then(newList=> console.log(newList))
       form.reset()
     }
   

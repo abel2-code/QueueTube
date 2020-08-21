@@ -67,23 +67,6 @@ export default function SimpleModal({ login, getSignIn }) {
     const handleSubmit = (e) => {
       e.preventDefault()
       let form = e.currentTarget
-<<<<<<< HEAD
-      let objectConfig = {
-        credentials: 'include',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: e.target.name.value,
-          email: e.target.email.value,
-          password: e.target.password.value
-        })
-      }
-      fetch('http://localhost:3001/login', objectConfig)
-      .then(res => res.json())
-      .then(user => console.log(user))
-=======
       getSignIn(e)
       // let objectConfig = {
       //   credentials: 'include',
@@ -104,7 +87,6 @@ export default function SimpleModal({ login, getSignIn }) {
       //   login(userName)
       //   console.log(login)
       // })
->>>>>>> ab61789634ccef99976b88b8e5f53b555f083133
       form.reset()
     }
   

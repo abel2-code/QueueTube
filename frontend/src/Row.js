@@ -91,13 +91,8 @@ function Row({ title, fetchUrl, isLargeRow, user }) {
                 <h5>{currentMovie.title}</h5>
                 <YouTube videoId={trailerUrl} 
                 opts={opts}/>
-<<<<<<< HEAD
-                <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button>
-                </div>
-=======
                 {user ? <button className='add-movie' placeholder='Add Movie' onClick={() => handleAddMovie()}>Add Movie</button> : ""}
                 </div> 
->>>>>>> ab61789634ccef99976b88b8e5f53b555f083133
                 : <div><h2>Sorry, there is no trailer for this movie</h2></div> 
                 : ""}
         </div>

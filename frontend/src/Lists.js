@@ -9,6 +9,10 @@ const Lists = () => {
     const [currentUser, setUser] = useState('');
     const [currentList, setList] = useState('')
 
+    let sameList
+
+
+
     useEffect(() => {
       fetch('http://localhost:3001/currentuser', {
         credentials: 'include'
@@ -35,10 +39,41 @@ const Lists = () => {
         })
       }
 
+      const createList = (e) => {
+        let objectConfig = {
+          credentials: 'include',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: e.target.title.value,
+            user_id: currentUser.id
+          })
+        }
+        fetch('http://localhost:3001/lists', objectConfig)
+        .then(res => res.json())
+        .then(newList=> setList(newList))
+      }
+
+      useEffect(() => {
+        let sameList
+        if (currentList !== sameList) {
+          console.log(currentList)}
+        // fetch(`http://localhost:3001/lists/${currentList.id}`, {
+        //   credentials: 'include'
+        // })
+        // .then(res => res.json())
+        // .then(list => {
+        //   sameList = list
+        //   setList(list)})}
+      }, []);
+
+
     return (
         <div className='lists'>
             <button className='go-back' onClick={() => goBack()}>Go Back</button>
-            <div><CreateList/></div>
+            <div><CreateList getList={e => createList(e)}/></div>
             <div className='each-list'>
               {currentUser ? 
               currentUser.lists.map(list => 

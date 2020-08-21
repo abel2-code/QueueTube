@@ -34,9 +34,6 @@ export default function Nav({ user, logout, login, getSignIn }) {
             className="nav-logo" 
             alt="logo"
             />
-<<<<<<< HEAD
-            <Modal/>
-=======
             {user ? 
             <img className="nav-avatar"
             src={avatar}
@@ -45,7 +42,6 @@ export default function Nav({ user, logout, login, getSignIn }) {
             />
             :
             <Modal currentUser={user} login={login} getSignIn={getSignIn}/>}
->>>>>>> ab61789634ccef99976b88b8e5f53b555f083133
         </div>
     )
 }
